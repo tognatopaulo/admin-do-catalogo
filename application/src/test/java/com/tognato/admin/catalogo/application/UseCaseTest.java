@@ -3,10 +3,11 @@ package com.tognato.admin.catalogo.application;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class ApplicationTest {
+public class UseCaseTest {
 
     @Test
-    public void UseCaseTest() {
+    public void testCreateUseCase() {
         Assertions.assertNotNull(new UseCase());
+        Assertions.assertNotNull(new UseCase().execute());
     }
 }
