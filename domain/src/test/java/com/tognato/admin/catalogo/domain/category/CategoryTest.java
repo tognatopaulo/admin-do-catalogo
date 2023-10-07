@@ -1,5 +1,7 @@
 package com.tognato.admin.catalogo.domain.category;
 
+import com.tognato.admin.catalogo.domain.exceptions.DomainException;
+import com.tognato.admin.catalogo.domain.validation.handler.ThrowsValidationHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -41,12 +43,11 @@ public class CategoryTest {
 
         final var actualCategory =
                 Category.newCategory(expectedName, expectedDescription, expectedIsActive);
-        actualCategory.validate();
 
-        final var actualException = Assertions.assertThrows(DomainException.class, () -> actualCategory.validate() );
+        final var actualException = Assertions.assertThrows(DomainException.class, () -> actualCategory.validate(new ThrowsValidationHandler()) );
 
         Assertions.assertEquals(expectedErrorCount,actualException.getErrors().size());
-        Assertions.assertEquals(expectedErrorMessage,actualException.getErrors().get(0));
+        Assertions.assertEquals(expectedErrorMessage,actualException.getErrors().get(0).message());
     }
 
 }
